@@ -1,0 +1,37 @@
+command /lilclear [<text>] [<text>]:
+    usage: &4/lilclear (mob name)
+    permission: LilClear.op
+    permission message: &4Scusa ma non puoi usare questo comando
+    aliases: /lc
+    trigger:
+        execute console command "minecraft:kill @e[type=%arg-1%]"
+        send "&5&l[LilClear]: &r%player% ha ucciso tutti i mob di questo tipo= %arg-1%" to players
+
+command /lilclearhelp [<text>]:
+    aliases: /lchelp
+    executable by: players and console
+    description: lilclear help command
+    usage: /lilclearhelp <page>
+    trigger:
+        set {_num} to arg-1 parsed as an integer
+        if {_num} is 1:
+            send "&8&m--------------------&8[ &5&lLilClear &r&8]&r&8&m--------------------"
+            send "&e/lilclear (mob)"
+            send "&e/lc (mob)"
+            send "&e/lilclear (1/2) "
+            send "&e/lchelp (1/2)"
+            send "&8&m---------------------&8[ &5Page &f1/2 <tooltip:Go to next page><run command:/lchelp 2>&l>>&r&8]&r&8&m--------------------"
+        else if {_num} is 2:
+            send "&8&m--------------------&8[ &5&lLilClear &r&8]&r&8&m--------------------"
+            send ""
+            send "                                  Credits:"
+            send ""
+            send "&6Skript made by: &4LilSamuray"
+            send ""
+            send ""
+            send ""
+            send "&8&m---------------------&8[&r<tooltip:Go to previous page><run command:/sshelp 1>&l<< &r&cPage &f2/2 &r&8]&r&8&m-------------------"
+        else if {_num} is greater than 2:
+            send "&r{@prefix} &rPage %{_num}% doesn't exist" to player
+        else:
+            send "&r{@prefix} &rYou need to specify an help page" to player
